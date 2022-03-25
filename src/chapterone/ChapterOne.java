@@ -4,6 +4,7 @@ public class ChapterOne {
     /**
      * 欧几里得算法，求最大公约数
      * gcd(greatest common divisor)
+     * 递归实现方式
      * @param p
      * @param q
      * @return
