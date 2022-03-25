@@ -48,7 +48,7 @@ public class ChapterOneTest {
          * 获取白名单
          */
         ArrayList<Integer> whiteListArrays = new ArrayList<>();
-        Scanner sc = new Scanner(new File("120TestData\\tinyT.txt"));
+        Scanner sc = new Scanner(new File("120TestData\\tinyW.txt"));
         while (sc.hasNext()){
             String input = sc.nextLine();
             whiteListArrays.add(Integer.parseInt(input));
@@ -59,13 +59,13 @@ public class ChapterOneTest {
          * 获取比较名单
          */
         ArrayList<Integer> inputListArrays = new ArrayList<>();
-        Scanner sc2 = new Scanner(new File("120TestData\\tinyW.txt"));
+        Scanner sc2 = new Scanner(new File("120TestData\\tinyT.txt"));
         while(sc2.hasNext()){
             String input = sc2.nextLine();
             inputListArrays.add(Integer.parseInt(input));
         }
         sc2.close();
-        //纯粹为了排序而排序，与本次测试无关联
+        //基于ArrayList<Integer>类型的排序
         whiteListArrays.sort(Comparator.naturalOrder());
 
 
@@ -75,7 +75,7 @@ public class ChapterOneTest {
         int[] inputListArrays2 = inputListArrays.stream().mapToInt(Integer::valueOf).toArray();
 
         for(int i = 0; i < inputListArrays.size(); i++){
-            if (ChapterOne.rank2(inputListArrays2[i], whitelistArrays2) > 0)
+            if (ChapterOne.rank2(inputListArrays2[i], whitelistArrays2) < 0)
             StdOut.println(inputListArrays2[i]);
         }
 
