@@ -90,4 +90,9 @@ public class ChapterOneTest {
         int gcdInt2 = ChapterOne.gcd(99, 3333);
         StdOut.println(gcdInt2);
     }
+
+    @Test
+    public void one_one_one() {
+        ChapterOne.one_one_one();
+    }
 }

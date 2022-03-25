@@ -1,5 +1,7 @@
 package chapterone;
 
+import edu.princeton.cs.algs4.StdOut;
+
 public class ChapterOne {
     /**
      * 欧几里得算法，求最大公约数
@@ -54,12 +56,12 @@ public class ChapterOne {
         }
         return -1;
     }
-    public void oneOneOne(){
-        System.out.println("( 0 + 15) / 2 = " + ((0 + 15) / 2) );
-        System.out.println((0 + 15) / 2);
+    public static void one_one_one(){
+        StdOut.println("(0+15)/2= " + ((0 + 15) / 2) );
+        StdOut.println("2.0e-6 * 100000000.1= " + (2.0e-6 * 100000000.1) );
+        StdOut.println("true && false || true && false = " + (true && false || true && false));
     }
 
     public static  void main(String[] args){
-        new ChapterOne().oneOneOne();
     }
 }
