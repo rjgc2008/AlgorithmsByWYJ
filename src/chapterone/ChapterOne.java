@@ -59,6 +59,7 @@ public class ChapterOne {
     public static void one_one_one(){
         StdOut.println("(0+15)/2= " + ((0 + 15) / 2) );
         StdOut.println("2.0e-6 * 100000000.1= " + (2.0e-6 * 100000000.1) );
+        // && 的优先级高于||的优先级，而不是同级
         StdOut.println("true && false || true && false = " + (true && false || true && false));
     }
 

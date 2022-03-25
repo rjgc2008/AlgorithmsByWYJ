@@ -1,6 +1,7 @@
 package chapterone;
 
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import org.junit.Test;
@@ -42,6 +43,10 @@ public class ChapterOneTest {
         StdOut.println(ChapterOne.rank2(11,intArrasys));
     }
 
+    /**
+     * 场景验证
+     * @throws FileNotFoundException
+     */
     @Test
     public void rank2_Test() throws FileNotFoundException {
         /**
@@ -91,6 +96,22 @@ public class ChapterOneTest {
         StdOut.println(gcdInt2);
     }
 
+    @Test
+    public  void draw_one(){
+        int N = 100;
+        StdDraw.setXscale(0, N);
+        StdDraw.setYscale(0, N * N);
+        StdDraw.setPenRadius(0.01);
+        for(int i = 1; i <= N; i++){
+            StdDraw.point(i, i);
+            StdDraw.point(i, i * i);
+            StdDraw.point(i, i * Math.log(i));
+        }
+    }
+
+    /**
+     * 课后习题
+     */
     @Test
     public void one_one_one() {
         ChapterOne.one_one_one();
