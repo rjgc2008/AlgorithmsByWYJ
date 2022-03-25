@@ -16,7 +16,7 @@ public class ChapterOneTest {
             intArrasys[i] = 9 - i;
         }
         Arrays.sort(intArrasys);
-        StdOut.println(ChapterOne.rank(3, intArrasys));
+        StdOut.println(ChapterOne.rank(11, intArrasys));
     }
 
     @Test
@@ -25,5 +25,15 @@ public class ChapterOneTest {
         StdOut.println(gcdInt);
         int gcdInt2 = ChapterOne.gcd(99, 3333);
         StdOut.println(gcdInt2);
+    }
+
+    @Test
+    public void rank2() {
+        int[] intArrasys = new int[10];
+        for(int i = 0; i < intArrasys.length; i++){
+            intArrasys[i] = 9 - i;
+        }
+        Arrays.sort(intArrasys);
+        StdOut.println(ChapterOne.rank2(11,intArrasys));
     }
 }
