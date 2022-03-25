@@ -9,5 +9,6 @@ public class PracticeOneTest {
     @Test
     public void oneOneOne() {
         new PracticeOne().oneOneOne();
+        new PracticeOne().oneOneOne();
     }
 }
