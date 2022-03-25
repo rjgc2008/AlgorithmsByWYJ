@@ -16,8 +16,8 @@ public class ChapterOne {
 
     /**
      * 二分查找法
-     * 递归实现方法
-     * 重要：数组a必须是升序数组
+     * 递归实现
+     * 重要：数组a是升序数组
      * @param key
      * @param a
      * @return 如果key存在于数组a中，则返回key存在于数组a中的索引号；如果key不存在于数组a中，则返回-1
@@ -34,7 +34,14 @@ public class ChapterOne {
         return mid;
     }
 
-
+    /**
+     * 二分查找法
+     * 非递归实现
+     * 数组a为升级数组
+     * @param key
+     * @param a
+     * @return
+     */
     public static int rank2(int key, int[] a) {
         int lo = 0;
         int hi = a.length -1 ;
