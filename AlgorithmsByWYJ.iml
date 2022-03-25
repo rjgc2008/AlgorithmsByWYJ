@@ -9,5 +9,6 @@
     <orderEntry type="jdk" jdkName="17" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="100Junit" level="project" />
+    <orderEntry type="library" name="110AlgorithmsJars" level="project" />
   </component>
 </module>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="110AlgorithmsJars">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/110AlgorithmsJars" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/110AlgorithmsJars" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/110AlgorithmsJars" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/110AlgorithmsJars" recursive="false" type="SOURCES" />
+  </library>
+</component>

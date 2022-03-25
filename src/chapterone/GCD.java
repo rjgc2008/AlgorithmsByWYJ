@@ -1,3 +1,5 @@
+package chapterone;
+
 public class GCD {
     //欧几里得算法，求最大公约数
     //gcd(greatest common divisor)
