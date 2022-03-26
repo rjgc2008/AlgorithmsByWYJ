@@ -3,15 +3,12 @@ package chapterone;
 import edu.princeton.cs.algs4.*;
 import org.junit.Test;
 
-import java.awt.desktop.ScreenSleepEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
-
-import static org.junit.Assert.*;
 
 public class ChapterOneTest {
 
@@ -164,5 +161,30 @@ public class ChapterOneTest {
         ChapterOne.one_one_five(0.5, 0.7);
         ChapterOne.one_one_five(-1, 0.7);
         ChapterOne.one_one_five(0, 0.7);
+    }
+
+    @Test
+    public void one_one_six() {
+        ChapterOne.one_one_six();
+    }
+
+    @Test
+    public void one_one_seven_a() throws InterruptedException {
+        ChapterOne.one_one_seven_a();
+    }
+
+    @Test
+    public void one_one_seven_b() {
+        ChapterOne.one_one_seven_b();
+    }
+
+    @Test
+    public void one_one_seven_c() {
+        ChapterOne.one_one_seven_c();
+    }
+
+    @Test
+    public void one_one_eight() {
+        ChapterOne.one_one_eight();
     }
 }

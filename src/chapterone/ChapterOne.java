@@ -102,6 +102,59 @@ public class ChapterOne {
                 StdOut.println("NO");
     }
 
+    public  static  void one_one_six(){
+        int f = 0;
+        int g = 1;
+        for(int i = 0; i < 15; i++){
+            StdOut.println(f);
+            f = f + g;
+            g = f - g;
+        }
+    }
+
+    /**
+     * 想告诉我们是死循环
+     * @throws InterruptedException
+     */
+    public  static void one_one_seven_a() throws InterruptedException {
+        double t = 9.0;
+        while(Math.abs(t - 9.0 / 5) > .001){
+            t = (9.0 / t + t) / 2.0;
+            StdOut.println(t);
+            Thread.sleep(1000);
+        }
+        StdOut.printf("%.5f\n",t);
+    }
+
+    /**
+     * 经典的1+2+...+100
+     */
+    public static void one_one_seven_b(){
+        int sum = 0;
+        for(int i = 0; i< 1000; i++)
+            for(int j = 0; j < i; j++)
+                sum++;
+        StdOut.println(sum);
+    }
+
+    /**
+     * 应该是为了与上题做比较
+     */
+    public static void one_one_seven_c(){
+        int sum = 0;
+        for(int i = 1; i < 1000; i++)
+            for(int j = 0; j < 1000; j++)
+                sum++;
+        StdOut.println(sum);
+    }
+
+    public static void one_one_eight(){
+        //两个char型运算时，自动转换为int型；当char与别的类型运算时，也会先自动转换为int型的，再做其它类型的自动转换
+        StdOut.println('b');
+        StdOut.println('b' + 'c');
+        StdOut.println((char)('a' + 4));
+    }
+
     public static  void main(String[] args){
     }
 }
