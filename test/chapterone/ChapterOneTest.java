@@ -1,11 +1,9 @@
 package chapterone;
 
-import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdDraw;
-import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.*;
 import org.junit.Test;
 
+import java.awt.desktop.ScreenSleepEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -22,12 +20,12 @@ public class ChapterOneTest {
      */
     @Test
     public void rank() {
-        int[] intArrasys = new int[10];
-        for(int i = 0; i < intArrasys.length; i++){
-            intArrasys[i] = 9 - i;
+        int[] intArrays = new int[10];
+        for(int i = 0; i < intArrays.length; i++){
+            intArrays[i] = 9 - i;
         }
-        Arrays.sort(intArrasys);
-        StdOut.println(ChapterOne.rank(11, intArrasys));
+        Arrays.sort(intArrays);
+        StdOut.println(ChapterOne.rank(11, intArrays));
     }
 
     /**
@@ -97,7 +95,7 @@ public class ChapterOneTest {
     }
 
     @Test
-    public  void draw_one(){
+    public  void draw_one() throws InterruptedException {
         int N = 100;
         StdDraw.setXscale(0, N);
         StdDraw.setYscale(0, N * N);
@@ -107,13 +105,64 @@ public class ChapterOneTest {
             StdDraw.point(i, i * i);
             StdDraw.point(i, i * Math.log(i));
         }
+        Thread.sleep(10000);
     }
 
+    @Test
+    public void draw_two() throws InterruptedException {
+        int N = 50;
+        double[] a = new double[N];
+        for(int i = 0; i < N; i++){
+            a[i] = StdRandom.uniform();
+        }
+        for(int i = 0; i < N; i++){
+            double x = 1.0 / N * i;
+            double y = a[i] / 2.0;
+            double rw = 0.5 / N;
+            double rh = a[i] / 2.0;
+            StdDraw.filledRectangle(x, y, rw, rh);
+        }
+        Thread.sleep(10000);
+    }
+    @Test
+    public void draw_three() throws InterruptedException {
+        int N = 50;
+        double[] a = new double[N];
+        for(int i = 0; i < N; i++){
+            a[i] = StdRandom.uniform();
+        }
+        Arrays.sort(a);
+        for(int i = 0; i < N; i++){
+            double x = 1.0 / N * i;
+            double y = a[i] / 2.0;
+            double rw = 0.5 / N;
+            double rh = a[i] / 2.0;
+            StdDraw.filledRectangle(x, y, rw, rh);
+        }
+        Thread.sleep(10000);
+    }
     /**
      * 课后习题
      */
     @Test
     public void one_one_one() {
         ChapterOne.one_one_one();
+    }
+
+    @Test
+    public void one_one_two() {
+        ChapterOne.one_one_two();
+    }
+
+    @Test
+    public void one_one_three() throws FileNotFoundException {
+        ChapterOne.one_one_three();
+    }
+
+    @Test
+    public void one_one_five() {
+        ChapterOne.one_one_five(0.5, 0.7);
+        ChapterOne.one_one_five(-1, 0.7);
+        ChapterOne.one_one_five(0, 0.7);
     }
 }
