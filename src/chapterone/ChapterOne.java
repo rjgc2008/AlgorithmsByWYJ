@@ -155,6 +155,27 @@ public class ChapterOne {
         StdOut.println((char)('a' + 4));
     }
 
+    public static void one_one_nine(){
+        int N = 16;
+
+        String s = "";
+        int n = N;
+        while (n > 0){
+                s = n % 2 + s;
+                n /=2;
+            }
+        StdOut.println(s);
+
+        String s2 = "";
+        for(int i = N; i > 0; i /=2)
+            s2 = (i % 2) + s2;
+        StdOut.println(s2);
+
+        String s3 = "";
+        s3 = Integer.toBinaryString(N);
+        StdOut.println(s3);
+    }
+
     public static  void main(String[] args){
     }
 }

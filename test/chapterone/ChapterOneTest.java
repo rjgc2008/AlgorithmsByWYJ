@@ -187,4 +187,9 @@ public class ChapterOneTest {
     public void one_one_eight() {
         ChapterOne.one_one_eight();
     }
+
+    @Test
+    public void one_one_nine() {
+        ChapterOne.one_one_nine();
+    }
 }
