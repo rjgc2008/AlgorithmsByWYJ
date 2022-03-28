@@ -192,4 +192,24 @@ public class ChapterOneTest {
     public void one_one_nine() {
         ChapterOne.one_one_nine();
     }
+
+    @Test
+    public void one_one_oneone() {
+        ChapterOne.one_one_oneone();
+    }
+
+    @Test
+    public void one_one_onetwo() {
+        ChapterOne.one_one_onetwo();
+    }
+
+    @Test
+    public void one_one_onethree() {
+        ChapterOne.one_one_onethree(3,4);
+    }
+
+    @Test
+    public void one_one_onethree2() {
+        ChapterOne.one_one_onethree2(3,4);
+    }
 }

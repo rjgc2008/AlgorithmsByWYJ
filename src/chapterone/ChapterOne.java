@@ -1,6 +1,7 @@
 package chapterone;
 
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -174,6 +175,76 @@ public class ChapterOne {
         String s3 = "";
         s3 = Integer.toBinaryString(N);
         StdOut.println(s3);
+    }
+
+    public static void one_one_oneone(){
+        int[][] a = new int[10][10];
+        for(int i = 0; i < 10; i++)
+            for(int j = 0; j < 10; j++)
+                a[i][j] = StdRandom.uniform(1,100) - 50;
+        for(int i = 0; i < 10; i++)
+            for(int j = 0; j < 10; j++){
+                if(a[i][j] > 0)
+                    StdOut.println("a[" + i + "][" + j + "] = +");
+                else if(a[i][j] < 0)
+                    StdOut.println("a[" + i + "][" + j + "] = -");
+            }
+    }
+
+    public static void one_one_onetwo(){
+        int[] a = new int[10];
+        for(int i = 0; i < 10; i++)
+            a[i] = 9 - i;
+        for(int i = 0; i < 10; i++)
+            a[i] = a[a[i]];
+        for(int i = 0; i < 10; i++)
+            StdOut.println("a[" + i + "] = " + a[i]);
+    }
+
+    public static void one_one_onethree(int M, int N){
+        int[][] a = new int[M][N];
+        int[][] b = new int[N][M];
+        for(int i = 0; i < M; i++)
+            for(int j = 0; j < N; j++)
+                a[i][j] = StdRandom.uniform(100);
+        for(int i = 0; i < N; i++)
+            for(int j = 0; j < M; j++){
+                b[i][j] = a[j][i];
+            }
+        for(int i = 0; i < N; i++)
+            for(int j = 0; j < M; j++)
+                StdOut.println("a[" + j + "][" + i + "] = " + a[j][i] + "; b[" + i + "][" + j + "] = " + b[i][j]);
+    }
+
+    public static void one_one_onethree2(int M, int N){
+        int[][] a = new int[M][N];
+        int[][] b = new int[N][M];
+        String[] stra = new String[M];
+        String[] strb = new String[N];
+        for(int i = 0; i < M; i++)
+            stra[i] = "";
+        for(int i = 0; i < N; i++)
+            strb[i] = "";
+        for(int i = 0; i < M; i++){
+            for(int j = 0; j < N; j++){
+                a[i][j] = StdRandom.uniform(100);
+                stra[i] = stra[i] + "\t" + a[i][j];
+            }
+            stra[i] = stra[i] + "\n";
+        }
+        for(int i = 0; i < N; i++){
+            for(int j = 0; j < M; j++){
+                b[i][j] = a[j][i];
+                strb[i] = strb[i] + "\t" + b[i][j];
+            }
+            strb[i] = strb[i] + "\n";
+        }
+        StdOut.println("initial arrays:");
+        for(int i = 0; i < M; i++)
+            StdOut.println(stra[i]);
+        StdOut.println("transpose arrays:");
+        for(int i = 0; i < N; i++)
+            StdOut.println(strb[i]);
     }
 
     public static  void main(String[] args){
