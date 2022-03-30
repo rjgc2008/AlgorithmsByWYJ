@@ -212,4 +212,78 @@ public class ChapterOneTest {
     public void one_one_onethree2() {
         ChapterOne.one_one_onethree2(3,4);
     }
+
+    @Test
+    public void one_one_onefour() {
+        ChapterOne.one_one_onefour(1023);
+    }
+
+    @Test
+    public void one_one_onefive() {
+        int[] a = new int[10];
+        int M = 10;
+        int[] b = new int[M];
+        for(int i = 0; i < 10; i++)
+            a[i] = StdRandom.uniform(10);
+        b= ChapterOne.one_one_onefive(a, M);
+        for(int i = 0; i < a.length; i++)
+            StdOut.println(b[i]);
+    }
+
+    @Test
+    public void exR1() {
+        String str = ChapterOne.exR1(6);
+        StdOut.println(str);
+    }
+
+    @Test
+    public void mystery() {
+        int num1 = ChapterOne.mystery(2,25);
+        int num2 = ChapterOne.mystery(3, 11);
+        StdOut.println("myster(2, 25) = " + num1);
+        StdOut.println("myster(3, 11) = " + num2);
+    }
+
+    @Test
+    public void mystery2() {
+        int num1 = ChapterOne.mystery2(2,25);
+        int num2 = ChapterOne.mystery2(3, 11);
+        StdOut.println("myster2(2, 25) = " + num1);
+        StdOut.println("myster2(3, 11) = " + num2);
+    }
+
+    @Test
+    public void f() {
+        for(int N = 0; N < 100; N++)
+            StdOut.println(N + " " + ChapterOne.F(N));
+    }
+
+    @Test
+    public void f2() {
+        for(int N = 0; N < 100; N++)
+            StdOut.println(N + " " + ChapterOne.F2(N));
+    }
+
+    @Test
+    public void one_one_twozero() {
+        int N = 20;
+        double num = ChapterOne.one_one_twozero(N);
+        StdOut.println("ln(" + N + "!) = " + num);
+    }
+
+    @Test
+    public void one_one_twoone() throws FileNotFoundException {
+        ChapterOne.one_one_twoone(4);
+    }
+
+    @Test
+    public void one_one_twotwo() {
+        int mid = ChapterOne.one_one_twotwo();
+        StdOut.println("mid = " + mid);
+    }
+
+    @Test
+    public void one_one_twothree() throws FileNotFoundException {
+        ChapterOne.one_one_twothree();
+    }
 }

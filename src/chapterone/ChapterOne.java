@@ -5,6 +5,8 @@ import edu.princeton.cs.algs4.StdRandom;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ChapterOne {
@@ -37,7 +39,28 @@ public class ChapterOne {
 
         int mid = (lo + hi) / 2;
         if(key > a[mid]) return rank(key, a, mid + 1, hi);
-        if(key < a[mid]) return rank(key, a, lo, hi -1);
+        if(key < a[mid]) return rank(key, a, lo, mid -1);
+        return mid;
+    }
+
+    /**
+     * 二分查找法
+     * 递归实现，记录调用次数及每次调用时的游标
+     * 重要：数组a是升序数组
+     * @param key
+     * @param a
+     * @return 如果key存在于数组a中，则返回key存在于数组a中的索引号；如果key不存在于数组a中，则返回-1
+     */
+    public static int rank(int key, int[] a, int depth){
+        return rank(key, a, 0, a.length - 1, 1);
+    }
+    public static int rank(int key, int[] a, int lo, int hi, int depth){
+        if(lo > hi) return -1;
+        StdOut.println("current depth is " + depth + ", lo is " + lo + ", hi is " + hi);
+
+        int mid = (lo + hi) / 2;
+        if(key > a[mid]) return rank(key, a, mid + 1, hi, depth + 1);
+        if(key < a[mid]) return rank(key, a, lo, mid -1, depth + 1);
         return mid;
     }
 
@@ -247,6 +270,143 @@ public class ChapterOne {
             StdOut.println(strb[i]);
     }
 
+    public  static void one_one_onefour(int N){
+        int M = 0;
+        while( N / 2 > 0){
+            M++;
+            N /= 2;
+        }
+        StdOut.println(M);
+    }
+
+    public static int[] one_one_onefive(int[] a, int M){
+        int[] b = new int[M];
+        for(int num:a){
+            if(num > -1 && num < M)
+                b[num]++;
+        }
+        return b;
+    }
+
+    /**
+     * one_one_onesix
+     * @param n
+     * @return
+     */
+    public static String exR1(int n){
+        if (n <= 0) return "";
+        return exR1(n - 3) + n + exR1(n - 2) + n;
+    }
+
+    /**
+     * one_one_oneeight
+     * @param a
+     * @param b
+     * @return
+     */
+    public static int mystery(int a, int b){
+        if(b == 0) return 0;
+        if (b % 2 == 0) return mystery(a + a, b / 2);
+        return mystery(a + a, b / 2) + a;
+    }
+
+    public static int mystery2(int a, int b){
+        if(b == 0) return 1;
+        if (b % 2 == 0) return mystery2(a * a, b / 2);
+        return mystery2(a * a, b / 2) * a;
+    }
+
+    /**
+     * one_one_inenine
+     * @param N
+     * @return
+     */
+    public static long F(int N){
+        if(N == 0) return 0;
+        if(N == 1) return 1;
+        return F(N-1) + F(N-2);
+    }
+    public static long F2(int N){
+        if(N == 0) return 0;
+        if(N == 1) return 1;
+        long[] num = new long[N];
+        num[0] = 0;
+        num[1] = 1;
+        for(int i = 2; i < N; i++)
+            num[i] = num[i - 1] + num[i - 2];
+        return num[N - 1];
+    }
+
+    public static double one_one_twozero(int N){
+        if (N <= 0) return -1;
+        long multiply = 1;
+        for(int i = 1; i <= N; i++) {
+            multiply *= i;
+            StdOut.println("N = " + i + ",multiply = " + multiply);
+        }
+        return Math.log(multiply);
+    }
+
+    public static void one_one_twoone(int N) throws FileNotFoundException {
+        String[][] scores_array = new String[N][4];
+        Scanner sc = new Scanner(new File("120TestData\\one_one_twoone.txt"));
+        int i = 0;//行游标
+        int j = 0;//列游标
+        String[] tmp_array;//临时数组，记录读取每行，分割后的数组值
+        while(sc.hasNextLine()){
+            j = 0;//列数游标归零
+            tmp_array = sc.nextLine().split(" ");//读取每行并分割成数组
+            for(String str:tmp_array ){
+                scores_array[i][j++] = str;
+            }
+            scores_array[i][j] = String.valueOf(Double.parseDouble(tmp_array[1]) / Double.parseDouble(tmp_array[2]));
+            i++;//行游标加一
+        }
+
+        for(String strs[]:scores_array)
+                StdOut.printf("%10s,%10s,%10s,%10.3f\n",strs[0],strs[1],strs[2],Double.parseDouble(strs[3]));
+    }
+
+    public static int one_one_twotwo(){
+        int[] a = new int[100];
+        for(int i = 0; i < 100; i++)
+            a[i] = StdRandom.uniform(100);
+        Arrays.sort(a);
+        return ChapterOne.rank(33, a, 1);
+    }
+
+    public static void one_one_twothree() throws FileNotFoundException {
+        ArrayList<Integer> whitelist_ArrayList = new ArrayList<>();
+        int[] whitelist_IntArray;
+
+        Scanner whitelist_sc = new Scanner(new File("120TestData\\tinyW.txt"));
+        while(whitelist_sc.hasNext())
+            whitelist_ArrayList.add(Integer.parseInt(whitelist_sc.next()));
+        whitelist_sc.close();
+
+        whitelist_IntArray = new int[whitelist_ArrayList.size()];
+        whitelist_IntArray = whitelist_ArrayList.stream().mapToInt(Integer::valueOf).toArray();
+
+        Arrays.sort(whitelist_IntArray);//对int数组进行排序
+
+        ArrayList<Integer> compare_ArrayList = new ArrayList<>();
+        int[] compare_IntArray;
+        Scanner compare_sc = new Scanner(new File("120TestData\\tinyT.txt"));
+        while(compare_sc.hasNext())
+            compare_ArrayList.add(Integer.parseInt(compare_sc.next()));
+        compare_sc.close();
+        compare_IntArray = compare_ArrayList.stream().mapToInt(Integer::valueOf).toArray();
+
+        for(int i:compare_IntArray){
+            int result = rank(i, whitelist_IntArray);
+            if(result == -1) StdOut.println(i + " : + " );
+            else StdOut.println(i + " : -");
+        }
+
+
+
+
+    }
     public static  void main(String[] args){
     }
 }
