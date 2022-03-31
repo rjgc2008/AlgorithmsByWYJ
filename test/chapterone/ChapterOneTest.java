@@ -284,6 +284,18 @@ public class ChapterOneTest {
 
     @Test
     public void one_one_twothree() throws FileNotFoundException {
-        ChapterOne.one_one_twothree();
+        ChapterOne.one_one_twothree("+");
+        StdOut.println("===============");
+        ChapterOne.one_one_twothree("-");
+    }
+
+    @Test
+    public void one_one_twofour() {
+        ChapterOne.one_one_twofour();
+    }
+
+    @Test
+    public void one_one_twoseven() {
+        ChapterOne.one_one_twoseven();
     }
 }
