@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Zenith - jdbc:zenith:@172.16.2.23:32082" uuid="a8a3c3cb-802c-4cc4-b4a8-8828f002292e">
+      <driver-ref>7386986f-d980-446b-90d0-04721af17be0</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>com.huawei.gauss.jdbc.ZenithDriver</jdbc-driver>
+      <jdbc-url>jdbc:zenith:@172.16.2.23:32082</jdbc-url>
+    </data-source>
+  </component>
+</project>
