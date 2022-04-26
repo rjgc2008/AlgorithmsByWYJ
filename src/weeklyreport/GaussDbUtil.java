@@ -1,13 +1,15 @@
-package chapterone;
+package weeklyreport;
 
 import edu.princeton.cs.algs4.StdOut;
 import learningaccumulation.WeekTime;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class GaussDbUtil {
     //记录公有云：HK/Ctyun/Europe/Brazil/A/B/D/F
@@ -60,55 +62,47 @@ public class GaussDbUtil {
 
     public GaussDbUtil(String str) {
         nameOfArea = str;
+        DBInfo dbInfoCampubaseDB = null;
+        DBInfo dbInfoUserDB = null;
         if (str.equals("HK")) {
-            DBInfo dbInfoCampubaseDB = new DBInfo("172.16.2.23", "32082", "campusbasedb", "Changeme_123");
-            DBInfo dbInfoUserDB = new DBInfo("172.16.2.23", "32085", "userdb", "Changeme_123");
-            // 建数据库连接。
-            try {
-                // 加载数据库驱动。
-                Class.forName(dbInfoCampubaseDB.driver);
-                // 创建数据库连接。
-                connCampusbaseDB = DriverManager.getConnection(dbInfoCampubaseDB.sourceURL, dbInfoCampubaseDB.dbName, dbInfoCampubaseDB.password);
-                stmtCampusbaseDB = connCampusbaseDB.createStatement();
-
-                connUserDB = DriverManager.getConnection(dbInfoUserDB.sourceURL, dbInfoUserDB.dbName, dbInfoUserDB.password);
-                stmtUserDB = connUserDB.createStatement();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            dbInfoCampubaseDB = new DBInfo("172.16.2.23", "32082", "campusbasedb", "Changeme_123");
+            dbInfoUserDB = new DBInfo("172.16.2.23", "32085", "userdb", "Changeme_123");
+        } else if (str.equals("Ctyun")) {
+            dbInfoCampubaseDB = new DBInfo("192.168.3.15", "32087", "campusbasedb", "Changeme_123");
+            dbInfoUserDB = new DBInfo("192.168.3.14", "32082", "userdb", "Changeme_123");
         } else if (str.equals("Europe")) {
-            DBInfo dbinfoCampubaseDB = new DBInfo("192.168.2.72", "32083", "campusbasedb", "Changeme_123");
-            DBInfo dbinfoUserDB = new DBInfo("192.168.2.71", "32083", "userdb", "Changeme_123");
-            // 建数据库连接。
-            try {
-                // 加载数据库驱动。
-                Class.forName(dbinfoCampubaseDB.driver);
-                // 创建数据库连接。
-                connCampusbaseDB = DriverManager.getConnection(dbinfoCampubaseDB.sourceURL, dbinfoCampubaseDB.dbName, dbinfoCampubaseDB.password);
-                stmtCampusbaseDB = connCampusbaseDB.createStatement();
-
-                connUserDB = DriverManager.getConnection(dbinfoUserDB.sourceURL, dbinfoUserDB.dbName, dbinfoUserDB.password);
-                stmtUserDB = connUserDB.createStatement();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            dbInfoCampubaseDB = new DBInfo("192.168.2.72", "32083", "campusbasedb", "Changeme_123");
+            dbInfoUserDB = new DBInfo("192.168.2.71", "32083", "userdb", "Changeme_123");
         } else if (str.equals("Brazil")) {
-            DBInfo dbInfoCampubaseDB = new DBInfo("172.16.2.23", "32082", "campusbasedb", "Changeme_123");
-            DBInfo dbInfoUserDB = new DBInfo("172.16.2.23", "32085", "userdb", "Changeme_123");
-            // 建数据库连接。
-            try {
-                // 加载数据库驱动。
-                Class.forName(dbInfoCampubaseDB.driver);
-                // 创建数据库连接。
-                connCampusbaseDB = DriverManager.getConnection(dbInfoCampubaseDB.sourceURL, dbInfoCampubaseDB.dbName, dbInfoCampubaseDB.password);
-                stmtCampusbaseDB = connCampusbaseDB.createStatement();
-
-                connUserDB = DriverManager.getConnection(dbInfoUserDB.sourceURL, dbInfoUserDB.dbName, dbInfoUserDB.password);
-                stmtUserDB = connUserDB.createStatement();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            dbInfoCampubaseDB = new DBInfo("10.1.2.67", "32083", "campusbasedb", "Changeme_123");
+            dbInfoUserDB = new DBInfo("10.1.2.65", "32083", "userdb", "Changeme_123");
+        } else if (str.equals("A")) {
+            dbInfoCampubaseDB = new DBInfo("10.16.2.106", "32081", "campusbasedb", "Changeme_123");
+            dbInfoUserDB = new DBInfo("10.16.2.101", "32083", "userdb", "Changeme_123");
+        } else if (str.equals("B")) {
+            dbInfoCampubaseDB = new DBInfo("10.100.2.56", "32083", "campusbasedb", "Changeme_123");
+            dbInfoUserDB = new DBInfo("10.100.2.51", "32080", "userdb", "Changeme_123");
+        } else if (str.equals("D")) {
+            dbInfoCampubaseDB = new DBInfo("10.22.11.16", "32080", "campusbasedb", "Changeme_123");
+            dbInfoUserDB = new DBInfo("10.22.11.13", "32083", "userdb", "Changeme_123");
+        } else if (str.equals("F")) {
+            dbInfoCampubaseDB = new DBInfo("10.21.11.46", "32083", "campusbasedb", "Changeme_123");
+            dbInfoUserDB = new DBInfo("10.21.11.41", "32080", "userdb", "Changeme_123");
         }
+        // 建数据库连接。
+        try {
+            // 加载数据库驱动。
+            Class.forName(dbInfoCampubaseDB.driver);
+            // 创建数据库连接。
+            connCampusbaseDB = DriverManager.getConnection(dbInfoCampubaseDB.sourceURL, dbInfoCampubaseDB.dbName, dbInfoCampubaseDB.password);
+            stmtCampusbaseDB = connCampusbaseDB.createStatement();
+
+            connUserDB = DriverManager.getConnection(dbInfoUserDB.sourceURL, dbInfoUserDB.dbName, dbInfoUserDB.password);
+            stmtUserDB = connUserDB.createStatement();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -122,7 +116,7 @@ public class GaussDbUtil {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            StdOut.printf("[%s] close stmtCampusbaseDB\n",nameOfArea);
+            StdOut.printf("[%s] close stmtCampusbaseDB\n", nameOfArea);
         }
         //关闭 Connection
         if (connCampusbaseDB != null) {
@@ -131,7 +125,7 @@ public class GaussDbUtil {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            StdOut.printf("[%s] close connCampusbaseDB\n",nameOfArea);
+            StdOut.printf("[%s] close connCampusbaseDB\n", nameOfArea);
         }
         //关闭 Statement
         if (stmtUserDB != null) {
@@ -140,7 +134,7 @@ public class GaussDbUtil {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            StdOut.printf("[%s] close stmtUserDB\n",nameOfArea);
+            StdOut.printf("[%s] close stmtUserDB\n", nameOfArea);
         }
         //关闭 Connection
         if (connUserDB != null) {
@@ -149,7 +143,7 @@ public class GaussDbUtil {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            StdOut.printf("[%s] close connUserDB\n",nameOfArea);
+            StdOut.printf("[%s] close connUserDB\n", nameOfArea);
         }
     }
 
@@ -175,8 +169,9 @@ public class GaussDbUtil {
         String SumOfMSPNormal = getDeviceSumInfo(stmtUserDB, sqlMSPSum);
         StdOut.printf("%-50s%6s\n", "[" + nameOfArea + "] the sum of msp is : ", SumOfMSPNormal);
 
+        StdOut.println("---------------------------------------------------------");
         StdOut.println("the info about device&tenant&sum in this week");
-        this.printInfoIncrease(stmtCampusbaseDB,stmtUserDB);
+        this.printInfoIncrease(stmtCampusbaseDB, stmtUserDB);
     }
 
     private class DeviceIncreaseInfo {
@@ -193,7 +188,7 @@ public class GaussDbUtil {
         String sqlQueryIncreaseInfo = "SELECT count(*) AS SUM,TENANTID FROM CAMPUSBASEDB.T_CAMPUS_DEVICEMGR_DEVICE WHERE CREATETIME > " + startTimeOfThisWeek + " AND CREATETIME < " + endTimeOfThisWeek + " GROUP BY TENANTID ORDER BY SUM DESC LIMIT 10";
 
         ResultSet rs = null;
-        HashMap<String, DeviceIncreaseInfo> hashMapDeviceIncreaseInfo = new HashMap<String, DeviceIncreaseInfo>();
+        LinkedHashMap<String, DeviceIncreaseInfo> hashMapDeviceIncreaseInfo = new LinkedHashMap<String, DeviceIncreaseInfo>();
         try {
             // 执行普通SQL语句。
             rs = stmtCampusbaseDB.executeQuery(sqlQueryIncreaseInfo);
@@ -226,9 +221,8 @@ public class GaussDbUtil {
             }
         }
 
-        for(String tenantID : hashMapDeviceIncreaseInfo.keySet()){
-//            StdOut.println(tenantID + "|" + hashMapDeviceIncreaseInfo.get(tenantID).tenantName + "|" + hashMapDeviceIncreaseInfo.get(tenantID).deviceIncreaseSum);
-            StdOut.printf("%-40s|%-40s|%10s\n",tenantID,hashMapDeviceIncreaseInfo.get(tenantID).tenantName,hashMapDeviceIncreaseInfo.get(tenantID).deviceIncreaseSum);
+        for (String tenantID : hashMapDeviceIncreaseInfo.keySet()) {
+            StdOut.printf("%-40s|%-40s|%10s\n", tenantID, hashMapDeviceIncreaseInfo.get(tenantID).tenantName, hashMapDeviceIncreaseInfo.get(tenantID).deviceIncreaseSum);
         }
 
     }
@@ -314,8 +308,9 @@ public class GaussDbUtil {
 //        return array.toString();
 //    }
 
-    public static void main(String[] args)  {
-        GaussDbUtil HK = new GaussDbUtil("HK");
+    public static void main(String[] args) {
+        String platName = args[0];
+        GaussDbUtil HK = new GaussDbUtil(platName);
         try {
             HK.printInfo();
         } catch (Exception e) {
