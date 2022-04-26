@@ -8,7 +8,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class GaussDbUtil {
@@ -38,6 +37,11 @@ public class GaussDbUtil {
     String sqlTenantSum = "select count(*) AS SUM from T_ORGANIZATION_TAG where TAG_VALUE= 'tenant'";
     //SQL语句：查询平台MSP总数
     String sqlMSPSum = "select count(*) AS Sum from T_ORGANIZATION_TAG where TAG_VALUE= 'msp'";
+    //SQL语句：查询平台设备总数排名前10的租户
+    String sqlTotalDeviceAndTenantInfo = "SELECT count(*) AS sum,tenantid FROM CAMPUSBASEDB.T_CAMPUS_DEVICEMGR_DEVICE GROUP BY TENANTID ORDER BY sum DESC LIMIT 10";
+
+    //SQL语句：查询有设备的租户总数
+    String sqlOfgetSumOfTenant = "SELECT count(DISTINCT tenantid) as SUM FROM T_CAMPUS_DEVICEMGR_DEVICE";
 
     /**
      * 记录数据库登录信息
@@ -60,6 +64,11 @@ public class GaussDbUtil {
         }
     }
 
+    /**
+     * 构造函数：基于传入参数判断平台归属
+     *
+     * @param str
+     */
     public GaussDbUtil(String str) {
         nameOfArea = str;
         DBInfo dbInfoCampubaseDB = null;
@@ -116,7 +125,7 @@ public class GaussDbUtil {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            StdOut.printf("[%s] close stmtCampusbaseDB\n", nameOfArea);
+            StdOut.printf("|[%s] close stmtCampusbaseDB|", nameOfArea);
         }
         //关闭 Connection
         if (connCampusbaseDB != null) {
@@ -125,7 +134,7 @@ public class GaussDbUtil {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            StdOut.printf("[%s] close connCampusbaseDB\n", nameOfArea);
+            StdOut.printf("[%s] close connCampusbaseDB|", nameOfArea);
         }
         //关闭 Statement
         if (stmtUserDB != null) {
@@ -134,7 +143,7 @@ public class GaussDbUtil {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            StdOut.printf("[%s] close stmtUserDB\n", nameOfArea);
+            StdOut.printf("[%s] close stmtUserDB|", nameOfArea);
         }
         //关闭 Connection
         if (connUserDB != null) {
@@ -143,54 +152,76 @@ public class GaussDbUtil {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            StdOut.printf("[%s] close connUserDB\n", nameOfArea);
+            StdOut.printf("[%s] close connUserDB|", nameOfArea);
         }
     }
 
-    public void printInfo() {
-        String SumOfDevice = getDeviceSumInfo(stmtCampusbaseDB, sqlDeviceSum);
+    /**
+     * 打印统计信息
+     */
+    public void printStatisticsInfo() {
+        String SumOfDevice = getSum(stmtCampusbaseDB, sqlDeviceSum);
         StdOut.printf("%-50s%6s\n", "[" + nameOfArea + "] the sum of all device is : ", SumOfDevice);
 
-        String sumOfDeviceWarn = getDeviceSumInfo(stmtCampusbaseDB, sqlDeviceWarnSum);
+        String sumOfDeviceWarn = getSum(stmtCampusbaseDB, sqlDeviceWarnSum);
         StdOut.printf("%-50s%6s\n", "[" + nameOfArea + "] the sum of warn device is : ", sumOfDeviceWarn);
 
-        String sumOfDeviceOffline = getDeviceSumInfo(stmtCampusbaseDB, sqlDeviceOfflineSum);
+        String sumOfDeviceOffline = getSum(stmtCampusbaseDB, sqlDeviceOfflineSum);
         StdOut.printf("%-50s%6s\n", "[" + nameOfArea + "] the sum of offline device is : ", sumOfDeviceOffline);
 
-        String DeviceUnregisterSum = getDeviceSumInfo(stmtCampusbaseDB, sqlDeviceUnRegisterSum);
+        String DeviceUnregisterSum = getSum(stmtCampusbaseDB, sqlDeviceUnRegisterSum);
         StdOut.printf("%-50s%6s\n", "[" + nameOfArea + "] the sum of unregister device is : ", DeviceUnregisterSum);
 
-        String SumOfDeviceNormal = getDeviceSumInfo(stmtCampusbaseDB, sqlDeviceNormalSum);
+        String SumOfDeviceNormal = getSum(stmtCampusbaseDB, sqlDeviceNormalSum);
         StdOut.printf("%-50s%6s\n", "[" + nameOfArea + "] the sum of normal device is : ", SumOfDeviceNormal);
 
-        String SumOfTenantNormal = getDeviceSumInfo(stmtUserDB, sqlTenantSum);
+        String SumOfTenantNormal = getSum(stmtUserDB, sqlTenantSum);
         StdOut.printf("%-50s%6s\n", "[" + nameOfArea + "] the sum of tenant is : ", SumOfTenantNormal);
 
-        String SumOfMSPNormal = getDeviceSumInfo(stmtUserDB, sqlMSPSum);
+        String SumOfMSPNormal = getSum(stmtUserDB, sqlMSPSum);
         StdOut.printf("%-50s%6s\n", "[" + nameOfArea + "] the sum of msp is : ", SumOfMSPNormal);
 
+        String SumOfTenantHaveDevice = getSum(stmtCampusbaseDB,sqlOfgetSumOfTenant);
+        StdOut.printf("%-50s%6s\n", "[" + nameOfArea + "] the sum of tenant which have device is : ", SumOfTenantHaveDevice);
+
         StdOut.println("---------------------------------------------------------");
-        StdOut.println("the info about device&tenant&sum in this week");
-        this.printInfoIncrease(stmtCampusbaseDB, stmtUserDB);
+        StdOut.println("the tenant info about which increased most this week");
+        this.printTenantNameAndCount(stmtCampusbaseDB, stmtUserDB, this.sqlOfIncreasdMostThisWeek());
+        StdOut.println("---------------------------------------------------------");
+        StdOut.println("the tenant info about which have most device  in this platform");
+        this.printTenantNameAndCount(stmtCampusbaseDB, stmtUserDB, sqlTotalDeviceAndTenantInfo);
     }
 
     private class DeviceIncreaseInfo {
         String tenantName = null;
         String deviceIncreaseSum = null;
-
-
     }
 
-    public void printInfoIncrease(Statement stmtCampusbaseDB, Statement stmtUserDB) {
+    /**
+     * 打印本周内新增设备
+     * @return
+     */
+    public String sqlOfIncreasdMostThisWeek() {
         WeekTime weektime = new WeekTime();
         Long startTimeOfThisWeek = weektime.getWeekStartTime();
         Long endTimeOfThisWeek = weektime.getWeekEndTime();
         String sqlQueryIncreaseInfo = "SELECT count(*) AS SUM,TENANTID FROM CAMPUSBASEDB.T_CAMPUS_DEVICEMGR_DEVICE WHERE CREATETIME > " + startTimeOfThisWeek + " AND CREATETIME < " + endTimeOfThisWeek + " GROUP BY TENANTID ORDER BY SUM DESC LIMIT 10";
+        return sqlQueryIncreaseInfo;
+    }
 
+    /**
+     * 根据查询语句统计租户信息（租户ID、租户名称、设备总数）
+     * 主要有2种，一种查询一周内新增，另外一种查询统计总数
+     *
+     * @param stmtCampusbaseDB
+     * @param stmtUserDB
+     * @param sqlQueryIncreaseInfo
+     */
+    public void printTenantNameAndCount(Statement stmtCampusbaseDB, Statement stmtUserDB, String sqlQueryIncreaseInfo) {
         ResultSet rs = null;
         LinkedHashMap<String, DeviceIncreaseInfo> hashMapDeviceIncreaseInfo = new LinkedHashMap<String, DeviceIncreaseInfo>();
         try {
-            // 执行普通SQL语句。
+            // 根据SQL语句，在CampusbaseDB统计信息，执行普通SQL语句。
             rs = stmtCampusbaseDB.executeQuery(sqlQueryIncreaseInfo);
             while (rs.next()) {
                 DeviceIncreaseInfo div = new DeviceIncreaseInfo();
@@ -198,18 +229,19 @@ public class GaussDbUtil {
                 hashMapDeviceIncreaseInfo.put(rs.getString("TENANTID"), div);
             }
 
-            // 执行普通SQL语句。
             for (String tenantID : hashMapDeviceIncreaseInfo.keySet()) {
                 String sqlQueryTenantInfo = "select ORGID ,ORGNAME  from T_ORGANIZATION where ORGID= '" + tenantID + "'";
                 String tenantName = null;
 
+                // 根据SQL语句，在UserDB统计信息，执行普通SQL语句
                 rs = stmtUserDB.executeQuery(sqlQueryTenantInfo);
                 while (rs.next()) {
                     tenantName = rs.getString("ORGNAME");
                 }
                 hashMapDeviceIncreaseInfo.get(tenantID).tenantName = tenantName;
             }
-        } catch (SQLException e) {
+        } catch (
+                SQLException e) {
             e.printStackTrace();
         } finally {
             if (rs != null) {
@@ -221,16 +253,19 @@ public class GaussDbUtil {
             }
         }
 
-        for (String tenantID : hashMapDeviceIncreaseInfo.keySet()) {
-            StdOut.printf("%-40s|%-40s|%10s\n", tenantID, hashMapDeviceIncreaseInfo.get(tenantID).tenantName, hashMapDeviceIncreaseInfo.get(tenantID).deviceIncreaseSum);
+        //打印信息：租户ID|租户名称|设备总数
+        for (
+                String tenantID : hashMapDeviceIncreaseInfo.keySet()) {
+//            StdOut.printf("|%-40s|%-40s|%10s|\n", tenantID, hashMapDeviceIncreaseInfo.get(tenantID).tenantName, hashMapDeviceIncreaseInfo.get(tenantID).deviceIncreaseSum);
+            StdOut.printf("|%-40s|%10s|\n", hashMapDeviceIncreaseInfo.get(tenantID).tenantName, hashMapDeviceIncreaseInfo.get(tenantID).deviceIncreaseSum);
         }
-
     }
 
     /**
-     * 查询数据
+     * 根据SQL语句查询各种设备状态的设备总数
+     * 设备状态：总数|告警|离线|未注册|离线|正常
      */
-    public String getDeviceSumInfo(Statement stmt, String sql) {
+    public String getSum(Statement stmt, String sql) {
         ResultSet rs = null;
         String resultSum = null;
         try {
@@ -312,7 +347,7 @@ public class GaussDbUtil {
         String platName = args[0];
         GaussDbUtil HK = new GaussDbUtil(platName);
         try {
-            HK.printInfo();
+            HK.printStatisticsInfo();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,9 +1,12 @@
 package learningaccumulation;
 
 
+import edu.princeton.cs.algs4.StdOut;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class WsDateUtil {
 
@@ -87,9 +90,12 @@ public class WsDateUtil {
      *
      * @return
      */
-    public  String getCurrentDate() {
+    public String getCurrentDate() {
         Date date = new Date();
         return sdf.format(date);
     }
 
+    public static void main(String[] args) {
+
+    }
 }
