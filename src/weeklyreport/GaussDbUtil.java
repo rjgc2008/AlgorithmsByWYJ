@@ -186,7 +186,7 @@ public class GaussDbUtil {
 
         StdOut.println("---------------------------------------------------------");
         StdOut.println("the tenant info about which increased most this week");
-        this.printTenantNameAndCount(stmtCampusbaseDB, stmtUserDB, this.sqlOfIncreasdMostThisWeek());
+        this.printTenantNameAndCount(stmtCampusbaseDB, stmtUserDB, this.getSqlOfIncreasdMostThisWeek());
         StdOut.println("---------------------------------------------------------");
         StdOut.println("the tenant info about which have most device  in this platform");
         this.printTenantNameAndCount(stmtCampusbaseDB, stmtUserDB, sqlTotalDeviceAndTenantInfo);
@@ -198,10 +198,10 @@ public class GaussDbUtil {
     }
 
     /**
-     * 打印本周内新增设备
+     * 生成本周内新增设备的SQL语句
      * @return
      */
-    public String sqlOfIncreasdMostThisWeek() {
+    public String getSqlOfIncreasdMostThisWeek() {
         WeekTime weektime = new WeekTime();
         Long startTimeOfThisWeek = weektime.getWeekStartTime();
         Long endTimeOfThisWeek = weektime.getWeekEndTime();

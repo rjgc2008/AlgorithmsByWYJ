@@ -2,18 +2,21 @@ package learningaccumulation;
 
 import edu.princeton.cs.algs4.StdOut;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MonthTime {
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public long getMonthStartTime(int month){
         // 获取当月第一天
-        Calendar FirstDayOfMonthJan = Calendar.getInstance();
-        FirstDayOfMonthJan.set(Calendar.MONTH,month);
-        FirstDayOfMonthJan.set(Calendar.DAY_OF_MONTH, 1);
-        FirstDayOfMonthJan.set(Calendar.HOUR_OF_DAY, 0);
-        FirstDayOfMonthJan.set(Calendar.MINUTE, 0);
-        FirstDayOfMonthJan.set(Calendar.SECOND, 0);
-        long firstdayTime = FirstDayOfMonthJan.getTime().getTime();
+        Calendar FirstDayOfMonth = Calendar.getInstance();
+        FirstDayOfMonth.set(Calendar.MONTH,month);
+        FirstDayOfMonth.set(Calendar.DAY_OF_MONTH, 1);
+        FirstDayOfMonth.set(Calendar.HOUR_OF_DAY, 0);
+        FirstDayOfMonth.set(Calendar.MINUTE, 0);
+        FirstDayOfMonth.set(Calendar.SECOND, 0);
+        long firstdayTime = FirstDayOfMonth.getTime().getTime();
+        StdOut.printf("%s\n",sdf.format(FirstDayOfMonth.getTime()));
         return firstdayTime;
     }
 
