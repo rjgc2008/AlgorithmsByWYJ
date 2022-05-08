@@ -1,4 +1,4 @@
-package weeklyreport;
+package derby;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -58,7 +58,7 @@ public class DerbyTest {
         ps.setString(4,"gif");
         String fileName;
         if (path == null)
-            fileName=".\\src\\weeklyreport\\cupisle.gif";
+            fileName=".\\src\\derby\\cupisle.gif";
         else
             fileName=path + File.separator + "cupisle.gif";
         File file = new File (fileName);
@@ -72,7 +72,7 @@ public class DerbyTest {
         ps.setBigDecimal(3, new BigDecimal("1166.77"));
         ps.setString(4,"gif");
         if (path == null)
-            fileName="smallisle.gif";
+            fileName=".\\src\\derby\\smallisle.gif";
         else
             fileName=path + File.separator + "smallisle.gif";
         file = new File (fileName);
@@ -86,7 +86,7 @@ public class DerbyTest {
         ps.setBigDecimal(3, new BigDecimal("9117.90"));
         ps.setString(4,"gif");
         if (path == null)
-            fileName="witchisle.gif";
+            fileName=".\\src\\derby\\witchisle.gif";
         else
             fileName=path + File.separator + "witchisle.gif";
         file = new File (fileName);

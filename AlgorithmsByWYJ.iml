@@ -6,18 +6,10 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
     </content>
-    <orderEntry type="jdk" jdkName="17" jdkType="JavaSDK" />
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/101JDBC/com.huawei.gauss.jdbc.ZenithDriver-1.0.100.156-1.20.8200.278020.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="library" name="101JDBC" level="project" />
+    <orderEntry type="library" name="110AlgorithmsJars" level="project" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="100Junit" level="project" />
-    <orderEntry type="library" name="110AlgorithmsJars" level="project" />
   </component>
 </module>

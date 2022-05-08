@@ -1,19 +1,14 @@
 package derby;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.PreparedStatement;
+import java.io.*;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.math.BigDecimal;
-import java.sql.Clob;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
-public class DerbyTest {
+public class DerbyTestDatabase {
 
     public static final String CSdriver = new String("org.apache.derby.jdbc.EmbeddedDriver");
     public static final String dbURLCS = new String("jdbc:derby:102Derby\\toursdb;create=true");
@@ -56,6 +51,7 @@ public class DerbyTest {
         ps.setString(2,"Cup Island");
         ps.setBigDecimal(3, new BigDecimal("1776.11"));
         ps.setString(4,"gif");
+
         String fileName;
         if (path == null)
             fileName=".\\src\\derby\\cupisle.gif";

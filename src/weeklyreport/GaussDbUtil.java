@@ -1,6 +1,7 @@
 package weeklyreport;
 
 import edu.princeton.cs.algs4.StdOut;
+import learningaccumulation.MonthTime;
 import learningaccumulation.WeekTime;
 
 import java.sql.Connection;
@@ -160,6 +161,8 @@ public class GaussDbUtil {
      * 打印统计信息
      */
     public void printStatisticsInfo() {
+        StdOut.printf("Title: up to %s,the Statistics info about this platform\n",new WeekTime().getCurrentTimeStr());
+        StdOut.println("---------------------------------------------------------");
         String SumOfDevice = getSum(stmtCampusbaseDB, sqlDeviceSum);
         StdOut.printf("%-50s%6s\n", "[" + nameOfArea + "] the sum of all device is : ", SumOfDevice);
 
@@ -181,15 +184,24 @@ public class GaussDbUtil {
         String SumOfMSPNormal = getSum(stmtUserDB, sqlMSPSum);
         StdOut.printf("%-50s%6s\n", "[" + nameOfArea + "] the sum of msp is : ", SumOfMSPNormal);
 
-        String SumOfTenantHaveDevice = getSum(stmtCampusbaseDB,sqlOfgetSumOfTenant);
+        String SumOfTenantHaveDevice = getSum(stmtCampusbaseDB, sqlOfgetSumOfTenant);
         StdOut.printf("%-50s%6s\n", "[" + nameOfArea + "] the sum of tenant which have device is : ", SumOfTenantHaveDevice);
 
+        StdOut.printf("\n\nTitle: %s-%s the tenant info about which increased most this week\n",new WeekTime().getWeekStartTimeStr(),new WeekTime().getWeekEndTimeStr());
         StdOut.println("---------------------------------------------------------");
-        StdOut.println("the tenant info about which increased most this week");
-        this.printTenantNameAndCount(stmtCampusbaseDB, stmtUserDB, this.getSqlOfIncreasdMostThisWeek());
+        StdOut.printf("|%-12s|%-40s\n", "SumOfDevices","TenantName" );
         StdOut.println("---------------------------------------------------------");
-        StdOut.println("the tenant info about which have most device  in this platform");
-        this.printTenantNameAndCount(stmtCampusbaseDB, stmtUserDB, sqlTotalDeviceAndTenantInfo);
+        this.printHashMap(this.getTenantNameAndCount(stmtCampusbaseDB, stmtUserDB, this.getSqlOfIncreasdMostThisWeek()));
+        StdOut.printf("\n\nTitle: %s-%s the tenant info about which increased most this month\n",new MonthTime().getCurrentMonthStartTimeStr(),new MonthTime().getCurrentMonthEndTimeStr());
+        StdOut.println("---------------------------------------------------------");
+        StdOut.printf("|%-12s|%-40s\n", "SumOfDevices","TenantName" );
+        StdOut.println("---------------------------------------------------------");
+        this.printHashMap(this.getTenantNameAndCount(stmtCampusbaseDB, stmtUserDB, this.getSqlofIncreasedMostThisMonth()));
+        StdOut.printf("\n\nTitle: up to %s,the tenant info about which have most device  in this platform\n",new WeekTime().getCurrentTimeStr());
+        StdOut.println("---------------------------------------------------------");
+        StdOut.printf("|%-12s|%-40s\n", "SumOfDevices","TenantName" );
+        StdOut.println("---------------------------------------------------------");
+        this.printHashMap(this.getTenantNameAndCount(stmtCampusbaseDB, stmtUserDB, sqlTotalDeviceAndTenantInfo));
     }
 
     private class DeviceIncreaseInfo {
@@ -199,6 +211,7 @@ public class GaussDbUtil {
 
     /**
      * 生成本周内新增设备的SQL语句
+     *
      * @return
      */
     public String getSqlOfIncreasdMostThisWeek() {
@@ -210,6 +223,18 @@ public class GaussDbUtil {
     }
 
     /**
+     * 生成本月内新增设备的SQL语句
+     * @return
+     */
+    public String getSqlofIncreasedMostThisMonth(){
+        MonthTime MonthTime = new MonthTime();
+        Long startTimeOfThisMonth = MonthTime.getCurrentMonthStartTime();
+        Long endTimeOfThisMonth = MonthTime.getCurrentMonthEndTime();
+        String sqlQueryIncreaseInfo = "SELECT count(*) AS SUM,TENANTID FROM CAMPUSBASEDB.T_CAMPUS_DEVICEMGR_DEVICE WHERE CREATETIME > " + startTimeOfThisMonth + " AND CREATETIME < " + endTimeOfThisMonth + " GROUP BY TENANTID ORDER BY SUM DESC LIMIT 10";
+        return sqlQueryIncreaseInfo;
+    }
+
+    /**
      * 根据查询语句统计租户信息（租户ID、租户名称、设备总数）
      * 主要有2种，一种查询一周内新增，另外一种查询统计总数
      *
@@ -217,7 +242,7 @@ public class GaussDbUtil {
      * @param stmtUserDB
      * @param sqlQueryIncreaseInfo
      */
-    public void printTenantNameAndCount(Statement stmtCampusbaseDB, Statement stmtUserDB, String sqlQueryIncreaseInfo) {
+    public LinkedHashMap<String, DeviceIncreaseInfo> getTenantNameAndCount(Statement stmtCampusbaseDB, Statement stmtUserDB, String sqlQueryIncreaseInfo) {
         ResultSet rs = null;
         LinkedHashMap<String, DeviceIncreaseInfo> hashMapDeviceIncreaseInfo = new LinkedHashMap<String, DeviceIncreaseInfo>();
         try {
@@ -252,12 +277,16 @@ public class GaussDbUtil {
                 }
             }
         }
+        return hashMapDeviceIncreaseInfo;
+    }
+
+    public void printHashMap(LinkedHashMap<String, DeviceIncreaseInfo> hashMapDeviceIncreaseInfo){
 
         //打印信息：租户ID|租户名称|设备总数
         for (
                 String tenantID : hashMapDeviceIncreaseInfo.keySet()) {
 //            StdOut.printf("|%-40s|%-40s|%10s|\n", tenantID, hashMapDeviceIncreaseInfo.get(tenantID).tenantName, hashMapDeviceIncreaseInfo.get(tenantID).deviceIncreaseSum);
-            StdOut.printf("|%-40s|%10s|\n", hashMapDeviceIncreaseInfo.get(tenantID).tenantName, hashMapDeviceIncreaseInfo.get(tenantID).deviceIncreaseSum);
+            StdOut.printf("|%-12s|%-40s\n", hashMapDeviceIncreaseInfo.get(tenantID).deviceIncreaseSum,hashMapDeviceIncreaseInfo.get(tenantID).tenantName );
         }
     }
 
