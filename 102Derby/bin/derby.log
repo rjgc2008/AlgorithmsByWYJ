@@ -1,0 +1,13 @@
+Sat May 07 11:43:00 CST 2022 : Apache Derby 网络服务器 - 10.15.2.0 - (1873585) 已启动并准备接受端口 1527 上的连接
+----------------------------------------------------------------
+Sat May 07 11:43:07 CST 2022:
+正在使用类加载程序 jdk.internal.loader.ClassLoaders$AppClassLoader@33909752 引导数据库
+目录 E:\Program Files\IDeaIU\100Projects\AlgorithmsByWYJ\102Derby\bin\TESTDB 中的 Derby 版本 The Apache Software Foundation - Apache Derby - 10.15.2.0 - (1873585) 实例 a816c00e-0180-9c9d-0fe7-00002e7ef091
+已从 file:/E:/Program%20Files/IDeaIU/100Projects/AlgorithmsByWYJ/102Derby/lib/derby.jar 加载
+java.vendor=Oracle Corporation
+user.dir=E:\Program Files\IDeaIU\100Projects\AlgorithmsByWYJ\102Derby\bin
+os.name=Windows Server 2019
+os.arch=amd64
+os.version=10.0
+derby.system.home=E:\Program Files\IDeaIU\100Projects\AlgorithmsByWYJ\102Derby\bin
+数据库类加载程序已启动 - derby.database.classpath=''
