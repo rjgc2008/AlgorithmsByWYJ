@@ -8,12 +8,5 @@
       <jdbc-driver>com.huawei.gauss.jdbc.ZenithDriver</jdbc-driver>
       <jdbc-url>jdbc:zenith:@172.16.2.23:32082</jdbc-url>
     </data-source>
-    <data-source source="LOCAL" name="Apache Derby (Embedded) - jdbc:derby:memory:E:/Program Files/IDeaIU/100Projects/AlgorithmsByWYJ/102Derby/100Database/toursdb;create=true" uuid="0c931fd4-8ed7-4f4c-88f6-26fdfb3fbd8d">
-      <driver-ref>derby.embedded</driver-ref>
-      <synchronize>true</synchronize>
-      <configured-by-url>true</configured-by-url>
-      <jdbc-driver>org.apache.derby.jdbc.EmbeddedDriver</jdbc-driver>
-      <jdbc-url>jdbc:derby:memory:$PROJECT_DIR$/102Derby/100Database;create=true</jdbc-url>
-    </data-source>
   </component>
 </project>

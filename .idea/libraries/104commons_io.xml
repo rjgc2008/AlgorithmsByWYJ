@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="104commons-io">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/104commons-io" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/104commons-io" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/104commons-io" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/104commons-io" recursive="false" type="SOURCES" />
+  </library>
+</component>

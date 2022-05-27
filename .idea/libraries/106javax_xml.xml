@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="106javax.xml">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/106javax.xml.bind" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/106javax.xml.bind" recursive="false" />
+  </library>
+</component>
