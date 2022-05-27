@@ -16,38 +16,40 @@ import java.util.Scanner;
 
 public class URLTest2 {
     public static void main(String[] args) {
-        String URLStr = "https://naas-intl.huaweicloud.com:11125/";
+        String BaseURL_String = "https://naas-intl.huaweicloud.com:11125/";
 
         try {
-            URL url = new URL(URLStr);
-            String encoding = DatatypeConverter.printBase64Binary("wyj:Huawei@123".getBytes("UTF-8"));
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Authorization", "Basic " + encoding);
-            InputStream contentInputStream = connection.getInputStream();
-            BufferedReader in = new BufferedReader(new InputStreamReader(contentInputStream));
-            FileUtils.writeStringToFile(new File(".\\src\\main\\java\\httpclient\\tmp.html"), IOUtils.toString(in), "UTF-8");
-            String line;
-            while ((line = in.readLine()) != null) {
-                StdOut.println(line);
-            }
+            URL Base_URL = new URL(BaseURL_String);
+            String encoding_String = DatatypeConverter.printBase64Binary("wyj:Huawei@123".getBytes("UTF-8"));
+            HttpURLConnection connection_HttpURLConnection = (HttpURLConnection) Base_URL.openConnection();
+            connection_HttpURLConnection.setRequestMethod("GET");
+            connection_HttpURLConnection.setDoOutput(true);
+            connection_HttpURLConnection.setRequestProperty("Authorization", "Basic " + encoding_String);
+            InputStream contentInputStream = connection_HttpURLConnection.getInputStream();
+            FileUtils.writeStringToFile(new File(".\\src\\main\\java\\httpclient\\tmp.html"), IOUtils.toString(contentInputStream), "UTF-8");
+//            BufferedReader in = new BufferedReader(new InputStreamReader(contentInputStream));
+//            String line;
+//            while ((line = in.readLine()) != null) {
+//                StdOut.println(line);
+//            }
 
             File file = new File(".\\src\\main\\java\\httpclient\\tmp.html");
             Document doc = Jsoup.parse(file, "UTF-8", "");
 
             Elements links = doc.select("a");
             for (int i = 1; i < links.size(); i++) {
-                StdOut.printf("href = %s\n", links.get(i).attr("href"));
-                StdOut.printf("href = %s\n", links.get(i).text());
-                URLStr = URLStr + links.get(i).attr("href");
-                url = new URL(URLStr);
+                StdOut.printf("%d: href = %s\n", i, links.get(i).attr("href"));
+//                StdOut.printf("%d: text = %s\n", i, links.get(i).text());
+                String URLStr = null;
+                URLStr = BaseURL_String + links.get(i).attr("href");
+                StdOut.printf("链接：%s",URLStr);
+                Base_URL = new URL(URLStr);
                 String FileName = links.get(i).text();
-                connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("GET");
-                connection.setDoOutput(true);
-                connection.setRequestProperty("Authorization", "Basic " + encoding);
-                contentInputStream = connection.getInputStream();
+                connection_HttpURLConnection = (HttpURLConnection) Base_URL.openConnection();
+                connection_HttpURLConnection.setRequestMethod("GET");
+                connection_HttpURLConnection.setDoOutput(true);
+                connection_HttpURLConnection.setRequestProperty("Authorization", "Basic " + encoding_String);
+                contentInputStream = connection_HttpURLConnection.getInputStream();
 //            in = new BufferedReader(new InputStreamReader(content));
 //            FileUtils.writeStringToFile(new File(".\\src\\main\\java\\httpclient\\" + FileName), IOUtils.toString(in), "UTF-8");
                 FileOutputStream outFileOutputStream = new FileOutputStream(".\\src\\main\\java\\httpclient\\" + FileName);
