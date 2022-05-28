@@ -3,7 +3,7 @@
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Eclipse" />
     <bytecodeTargetLevel>
-      <module name="AlgorithmsByWYJ" target="10" />
+      <module name="AlgorithmsByWYJ" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
