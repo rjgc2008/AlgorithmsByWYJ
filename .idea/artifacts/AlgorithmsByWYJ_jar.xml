@@ -2,18 +2,60 @@
   <artifact type="jar" name="AlgorithmsByWYJ:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/AlgorithmsByWYJ_jar</output-path>
     <root id="archive" name="AlgorithmsByWYJ.jar">
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/src/main/recource/META-INF/MANIFEST.MF" />
-      </element>
       <element id="module-output" name="AlgorithmsByWYJ" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/106javax.xml.bind/javax.xml.bind.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/107jsoup/jsoup-1.15.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/110AlgorithmsJars/algs4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/105slf4j/slf4j-api-1.7.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derby.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derby.war" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbynet.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyrun.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbytools.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyclient.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyshared.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyLocale_cs.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyLocale_es.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyLocale_fr.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyLocale_hu.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyLocale_it.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyLocale_pl.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyLocale_ru.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyLocale_de_DE.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyLocale_ja_JP.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyLocale_ko_KR.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyLocale_pt_BR.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyLocale_zh_CN.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyLocale_zh_TW.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/derbyoptionaltools.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/com.huawei.gauss.jdbc.ZenithDriver-1.0.100.156-1.20.8200.278020.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/100Junit/junit-4.13.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/100Junit/hamcrest-core-1.3.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/100Junit/junit-4.13.2-javadoc.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/100Junit/junit-4.13.2-sources.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/100Junit/hamcrest-core-1.3-javadoc.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/100Junit/hamcrest-core-1.3-sources.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/110AlgorithmsJars/algs4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/101JDBC/com.huawei.gauss.jdbc.ZenithDriver-1.0.100.156-1.20.8200.278020.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/jna-5.2.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/rxjava-2.2.8.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/commons-cli-1.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/httpcore5-5.1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/slf4j-api-1.7.25.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/httpclient5-5.1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/commons-codec-1.15.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/httpcore5-h2-5.1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/jna-platform-5.2.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/httpclient5-win-5.1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/reactive-streams-1.0.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/httpclient5-cache-5.1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/httpcore5-testing-5.1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/httpclient5-fluent-5.1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/httpcore5-reactive-5.1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/103HttpClient/lib/httpclient5-testing-5.1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/104commons-io/commons-io-2.11.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/104commons-io/commons-io-2.11.0-tests.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/104commons-io/commons-io-2.11.0-javadoc.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/104commons-io/commons-io-2.11.0-sources.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/104commons-io/commons-io-2.11.0-test-sources.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
